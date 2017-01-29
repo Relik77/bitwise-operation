@@ -68,19 +68,18 @@ Bitwise(0b0100)
 
 ### and()
 
-**Bitwise.and(...values)**
-
+**Bitwise.and(...values)**  
 **Bitwise(value).and(value)**
 
 Performs a logical **AND** of this target bit set with the argument bit set.
 
-Truth table:
-a | b | a AND b
---|--|--
-0 | 0 | 0
-0 | 1 | 0
-1 | 0 | 0
-1 | 1 | 1
+Truth table:  
+a | b | a AND b  
+--|--|--  
+0 | 0 | 0  
+0 | 1 | 0  
+1 | 0 | 0  
+1 | 1 | 1  
 
 Example:
 
