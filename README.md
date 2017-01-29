@@ -74,12 +74,12 @@ Bitwise(0b0100)
 Performs a logical **AND** of this target bit set with the argument bit set.
 
 Truth table:  
-a | b | a AND b  
---|---|--  
-0 | 0 | 0  
-0 | 1 | 0  
-1 | 0 | 0  
-1 | 1 | 1  
+| a | b | a AND b |  
+|---|---|---------|  
+| 0 | 0 |    0    |  
+| 0 | 1 |    0    |  
+| 1 | 0 |    0    |  
+| 1 | 1 |    1    |  
 
 Example:
 
@@ -104,12 +104,12 @@ Bitwise(0b0111)
 Performs a logical **OR** of this bit set with the bit set argument.
 
 Truth table:  
-a | b | a OR b  
---|---|--  
-0 | 0 | 0  
-0 | 1 | 1  
-1 | 0 | 1  
-1 | 1 | 1  
+| a | b | a OR b |  
+|---|---|--------|  
+| 0 | 0 |    0   |  
+| 0 | 1 |    1   |  
+| 1 | 0 |    1   |  
+| 1 | 1 |    1   |  
 
 Example:
 
@@ -134,12 +134,12 @@ Bitwise(0b0010)
 Performs a logical **XOR** of this bit set with the bit set argument.
 
 Truth table:  
-a | b | a XOR b  
---|---|--  
-0 | 0 | 0  
-0 | 1 | 1  
-1 | 0 | 1  
-1 | 1 | 0  
+| a | b | a XOR b |  
+|---|---|---------|  
+| 0 | 0 |    0    |  
+| 0 | 1 |    1    |  
+| 1 | 0 |    1    |  
+| 1 | 1 |    0    |  
 
 Example:
 
@@ -164,12 +164,12 @@ Bitwise(0b0010)
 Clears all of the bits in this BitSet whose corresponding bit is set in the specified BitSet.
 
 Truth table:  
-a | b | a NAND b  
---|---|--  
-0 | 0 | 1  
-0 | 1 | 1  
-1 | 0 | 1  
-1 | 1 | 0  
+| a | b | a NAND b |  
+|---|---|----------|  
+| 0 | 0 |     1    |  
+| 0 | 1 |     1    |  
+| 1 | 0 |     1    |  
+| 1 | 1 |     0    |  
 
 Example:
 
@@ -194,10 +194,10 @@ Alias: **andNot()**
 Performs a logical **NOT** of this target bit set.
 
 Truth table:  
-a | NOT a  
---|--  
-0 | 1  
-1 | 0  
+| a | NOT a |  
+| --|-------|  
+| 0 |   1   |  
+| 1 |   0   |  
 
 Example:
 
