@@ -1,4 +1,4 @@
-//     Bitwise.js 1.0.3
+//     Bitwise.js 1.0.4
 //     Bitwise may be freely distributed under the MIT license.
 
 (function() {
@@ -8,12 +8,30 @@
      * @constructor
      */
     function Bitwise(value) {
-        if (!(this instanceof Bitwise)) return new Bitwise(value);
-        this.value = value || 0;
+        var self = this,
+            idx = 0;
+
+        if (!(self instanceof Bitwise)) return new Bitwise(value);
+        if (Array.isArray(value)) {
+            self.value = 0;
+            value.forEach(function(value, idx) {
+                self.value |= (value ? 1 : 0) << idx;
+            });
+        } else if (typeof value == "string") {
+            self.value = 0;
+            for (var i = value.length - 1; i >= 0; i--) {
+                if (value[i] == "1" || value[i] == "0") {
+                    self.value |= (value[i] == "1" ? 1 : 0) << idx;
+                    idx++;
+                }
+            }
+        } else {
+            self.value = value || 0;
+        }
     }
 
     // Current version.
-    Bitwise.VERSION = '1.0.3';
+    Bitwise.VERSION = '1.0.4';
 
     Bitwise.and = function() {
         var args = Array.prototype.slice.call(arguments),
@@ -77,8 +95,29 @@
     };
     Bitwise.prototype.clone = Bitwise.prototype.copy;
 
-    Bitwise.prototype.toString = function() {
-        return this.value.toString(2);
+    Bitwise.prototype.toString = function(length, separator) {
+        var args = Array.prototype.slice.call(arguments),
+            value = this.value.toString(2);
+
+        if (args.length < 2) return value;
+        return value.replace(new RegExp("\\B(?=(\\d{" + length + "})+(?!\\d))", "g"), separator);
+    };
+
+    Bitwise.prototype.toArray = function() {
+        var value = this.value,
+            array = [];
+
+        if (value == 0) return [0];
+
+        while (value > 0) {
+            array.push(value & 1 > 0 ? 1 : 0);
+            value = value >> 1;
+        }
+        return array;
+    };
+
+    Bitwise.prototype.cardinality = function() {
+        return this.toString().match(/(1)/g).length;
     };
 
     Bitwise.prototype.length = function() {

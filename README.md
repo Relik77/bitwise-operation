@@ -41,12 +41,13 @@ Methods
 - [copy](#copy)
 - [valueOf](#valueOf)
 - [toString](#toString)
+- [toArray](#toArray)
+- [cardinality](#cardinality)
 
 
 ### Bitwise()
 
-**new Bitwise(value)**
-
+**new Bitwise(value)**  
 **Bitwise(value)**
 
 Create a bitwise object to chain operations.
@@ -63,6 +64,16 @@ Bitwise(0b0100)
     .valueOf();
 
 => 0b0110
+
+Bitwise([0, 0, 1, 0])
+    .valueOf();
+
+=> 0b0100
+
+Bitwise("1011")
+    .valueOf();
+
+=> 0b1011
 ```
 
 
@@ -478,9 +489,10 @@ Bitwise(0b0101)
 
 ### toString()
 
-**Bitwise(value).toString()**
+**Bitwise(value).toString()**  
+**Bitwise(value).toString(length, separator)**
 
-Returns a string representation of this bit set.
+Returns a string representation of this Bitwise.
 
 Example:
 
@@ -491,5 +503,59 @@ Bitwise(0b0101)
    .toString();
 
 => "0101"
+
+Bitwise(571)
+   .toString(4, " ");
+
+=> "10 0011 1011"
 ```
+
+### toArray()
+
+**Bitwise(value).toArray()**
+
+Returns a array representation of this Bitwise.
+
+Example:
+
+```js
+var Bitwise = require('bitwise-operation')
+
+var bitwise = Bitwise(571);
+
+bitwise.toString(4, " ");
+
+=> "10 0011 1011"
+
+
+bitwise.toArray();
+
+=> [ 1, 1, 0, 1, 1, 1, 0, 0, 0, 1 ]
+```
+
+### cardinality()
+
+**Bitwise(value).cardinality()**
+
+Returns the number of bits set to true in this Bitwise.
+
+Example:
+
+```js
+var Bitwise = require('bitwise-operation')
+
+var bitwise = Bitwise(571);
+
+bitwise.toString(4, " ");
+
+=> "10 0011 1011"
+
+
+bitwise.cardinality();
+
+=> 6
+```
+
+
+
 
