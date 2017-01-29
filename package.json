@@ -1,0 +1,36 @@
+{
+  "author": {
+    "name": "Gwenael Walet",
+    "email": "gwenael.walet@yahoo.fr"
+  },
+  "dependencies": {},
+  "description": "JavaScript's bitwise operation helper library.",
+  "directories": {},
+  "files": [
+    "bitwise.js",
+    "LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Relik77/bitwise-operation.git"
+},
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "license": "MIT",
+  "main": "bitwise.js",
+  "maintainers": [
+    {
+      "name": "Gwenael Walet",
+      "email": "gwenael.walet@yahoo.fr"
+    }
+  ],
+  "name": "bitwise-operation",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "version": "1.0.3"
+}
