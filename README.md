@@ -75,7 +75,7 @@ Performs a logical **AND** of this target bit set with the argument bit set.
 
 Truth table:  
 a | b | a AND b  
---|--|--  
+--|---|--  
 0 | 0 | 0  
 0 | 1 | 0  
 1 | 0 | 0  
@@ -98,19 +98,18 @@ Bitwise(0b0111)
 
 ### or()
 
-**Bitwise.or(...values)**
-
+**Bitwise.or(...values)**  
 **Bitwise(value).or(value)**
 
 Performs a logical **OR** of this bit set with the bit set argument.
 
-Truth table:
-a | b | a OR b
---|--|--
-0 | 0 | 0
-0 | 1 | 1
-1 | 0 | 1
-1 | 1 | 1
+Truth table:  
+a | b | a OR b  
+--|---|--  
+0 | 0 | 0  
+0 | 1 | 1  
+1 | 0 | 1  
+1 | 1 | 1  
 
 Example:
 
@@ -129,19 +128,18 @@ Bitwise(0b0010)
 
 ### xor()
 
-**Bitwise.xor(...values)**
-
+**Bitwise.xor(...values)**  
 **Bitwise(value).xor(value)**
 
 Performs a logical **XOR** of this bit set with the bit set argument.
 
-Truth table:
-a | b | a XOR b
---|--|--
-0 | 0 | 0
-0 | 1 | 1
-1 | 0 | 1
-1 | 1 | 0
+Truth table:  
+a | b | a XOR b  
+--|---|--  
+0 | 0 | 0  
+0 | 1 | 1  
+1 | 0 | 1  
+1 | 1 | 0  
 
 Example:
 
@@ -160,19 +158,18 @@ Bitwise(0b0010)
 
 ### nand()
 
-**Bitwise.nand(...values)**
-
+**Bitwise.nand(...values)**  
 **Bitwise(value).nand(value)**
 
 Clears all of the bits in this BitSet whose corresponding bit is set in the specified BitSet.
 
-Truth table:
-a | b | a NAND b
---|--|--
-0 | 0 | 1
-0 | 1 | 1
-1 | 0 | 1
-1 | 1 | 0
+Truth table:  
+a | b | a NAND b  
+--|---|--  
+0 | 0 | 1  
+0 | 1 | 1  
+1 | 0 | 1  
+1 | 1 | 0  
 
 Example:
 
@@ -196,11 +193,11 @@ Alias: **andNot()**
 
 Performs a logical **NOT** of this target bit set.
 
-Truth table:
-a | NOT a
---|--
-0 | 1
-1 | 0
+Truth table:  
+a | NOT a  
+--|--  
+0 | 1  
+1 | 0  
 
 Example:
 
@@ -216,8 +213,7 @@ Bitwise(0b1010)
 
 ### mask()
 
-**Bitwise.mask([fromIndex= 0,] toIndex)**
-
+**Bitwise.mask([fromIndex= 0,] toIndex)**  
 **Bitwise(value).mask([fromIndex= 0,] toIndex)**
 
 Sets the bits not in the specified fromIndex (inclusive) to the specified toIndex (inclusive) to false.
