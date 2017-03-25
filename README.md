@@ -19,12 +19,14 @@ Installation
 
 Methods
 -------
-- [Bitwise](#Bitwise)
-- [and](#and)
-- [or](#or)
-- [xor](#xor)
-- [nand](#nand)
+- [Bitwise](#bitwise)
 - [not](#not)
+- [and](#and)
+- [nand](#nand)
+- [or](#or)
+- [nor](#nor)
+- [xor](#xor)
+- [xnor](#xnor)
 - [mask](#mask)
 - [clear](#mask)
 - [length](#length)
@@ -34,14 +36,14 @@ Methods
 - [toggle](#toggle)
 - [swap](#swap)
 - [equals](#equals)
-- [setValue](#setValue)
-- [setRange](#setRange)
-- [unsetRange](#unsetRange)
-- [toggleRange](#toggleRange)
+- [setValue](#setvalue)
+- [setRange](#setrange)
+- [unsetRange](#unsetrange)
+- [toggleRange](#togglerange)
 - [copy](#copy)
-- [valueOf](#valueOf)
-- [toString](#toString)
-- [toArray](#toArray)
+- [valueOf](#valueof)
+- [toString](#tostring)
+- [toArray](#toarray)
 - [cardinality](#cardinality)
 
 
@@ -76,6 +78,32 @@ Bitwise("1011")
 => 0b1011
 ```
 
+### not()
+
+**Bitwise.not(value)**
+**Bitwise(value).not()**
+
+Performs a logical **NOT** of this target bit set.
+
+Truth table:
+| a | NOT a |
+| --|-------|
+| 0 |   1   |
+| 1 |   0   |
+
+Example:
+
+```js
+var Bitwise = require('bitwise-operation')
+
+Bitwise.not(0b1010);
+
+Bitwise(0b1010)
+  .not()
+  .valueOf();
+
+=> 0b0101
+```
 
 ### and()
 
@@ -97,7 +125,7 @@ Example:
 ```js
 var Bitwise = require('bitwise-operation')
 
-Bitwise.and(0b0111, Bitwise(0b0101), 0b1100)
+Bitwise.and(0b0111, Bitwise(0b0101), 0b1100);
 
 Bitwise(0b0111)
    .and(Bitwise(0b0101))
@@ -106,6 +134,36 @@ Bitwise(0b0111)
 
 => 0b0100
 ```
+
+### nand()
+
+**Bitwise.nand(...values)**
+**Bitwise(value).nand(value)**
+
+Clears all of the bits in this BitSet whose corresponding bit is set in the specified BitSet.
+
+Truth table:
+| a | b | a NAND b |
+|---|---|----------|
+| 0 | 0 |     1    |
+| 0 | 1 |     1    |
+| 1 | 0 |     1    |
+| 1 | 1 |     0    |
+
+Example:
+
+```js
+var Bitwise = require('bitwise-operation')
+
+Bitwise.nand(0b0010, 0b0110);
+
+Bitwise(0b0010)
+  .nand(0b0110)
+  .valueOf();
+
+=> 0b1101
+```
+Alias: **andNot()**
 
 ### or()
 
@@ -127,14 +185,41 @@ Example:
 ```js
 var Bitwise = require('bitwise-operation')
 
-Bitwise.or(0b0010, 0b0110)
-       .value();
+Bitwise.or(0b0010, 0b0110);
 
 Bitwise(0b0010)
     .or(0b0110)
     .valueOf();
 
 => 0b0110
+
+### nor()
+
+**Bitwise.nor(...values)**
+**Bitwise(value).nor(value)**
+
+Performs a logical **NOR** of this bit set with the bit set argument.
+
+Truth table:
+| a | b | a NOR b |
+|---|---|---------|
+| 0 | 0 |    1    |
+| 0 | 1 |    0    |
+| 1 | 0 |    0    |
+| 1 | 1 |    0    |
+
+Example:
+
+```js
+var Bitwise = require('bitwise-operation')
+
+Bitwise.nor(0b0010, 0b0110);
+
+Bitwise(0b0010)
+   .nor(0b0110)
+   .valueOf();
+
+=> 0b1001
 ```
 
 ### xor()
@@ -157,8 +242,7 @@ Example:
 ```js
 var Bitwise = require('bitwise-operation')
 
-Bitwise.xor(0b0010, 0b0110)
-       .value();
+Bitwise.xor(0b0010, 0b0110);
 
 Bitwise(0b0010)
    .xor(0b0110)
@@ -167,60 +251,35 @@ Bitwise(0b0010)
 => 0b0100
 ```
 
-### nand()
+### xnor()
 
-**Bitwise.nand(...values)**  
-**Bitwise(value).nand(value)**
+**Bitwise.xnor(...values)**
+**Bitwise(value).xnor(value)**
 
-Clears all of the bits in this BitSet whose corresponding bit is set in the specified BitSet.
+Performs a logical **XNOR** of this bit set with the bit set argument.
 
-Truth table:  
-| a | b | a NAND b |  
-|---|---|----------|  
-| 0 | 0 |     1    |  
-| 0 | 1 |     1    |  
-| 1 | 0 |     1    |  
-| 1 | 1 |     0    |  
+Truth table:
+| a | b | a XNOR b |
+|---|---|----------|
+| 0 | 0 |     1    |
+| 0 | 1 |     0    |
+| 1 | 0 |     0    |
+| 1 | 1 |     1    |
 
 Example:
 
 ```js
 var Bitwise = require('bitwise-operation')
 
-Bitwise.nand(0b0010, 0b0110)
-       .value();
+Bitwise.xor(0b0010, 0b0110);
 
 Bitwise(0b0010)
-  .nand(0b0110)
-  .valueOf();
+   .xor(0b0110)
+   .valueOf();
 
-=> 0b1101
+=> 0b1011
 ```
-Alias: **andNot()**
-
-### not()
-
-**Bitwise(value).not()**
-
-Performs a logical **NOT** of this target bit set.
-
-Truth table:  
-| a | NOT a |  
-| --|-------|  
-| 0 |   1   |  
-| 1 |   0   |  
-
-Example:
-
-```js
-var Bitwise = require('bitwise-operation')
-
-Bitwise(0b1010)
-  .not()
-  .valueOf();
-
-=> 0b0101
-```
+Alias: **nxor()**
 
 ### mask()
 
@@ -234,9 +293,12 @@ Example:
 ```js
 var Bitwise = require('bitwise-operation')
 
+Bitwise.mask(1, 5); // => 0b00011110
+
 Bitwise(0b1011011)
   .mask(1, 5) // => 0b00011110
   .valueOf();
+// Equal to: Bitwise(0b1011011).and(Bitwise.mask(1, 5)).valueOf()
 
 => 0b00011010
 ```
@@ -333,6 +395,7 @@ Bitwise(0b0001)
 
 ### toggle()
 
+**Bitwise.toggle(value, ...idx)**
 **Bitwise(value).toggle(idx)**
 
 Sets the bit at the specified index to the complement of its current value.
@@ -341,6 +404,8 @@ Example:
 
 ```js
 var Bitwise = require('bitwise-operation')
+
+Bitwise.toggle(0b0001, 1);
 
 Bitwise(0b0001)
   .toggle(1)
@@ -351,6 +416,7 @@ Bitwise(0b0001)
 
 ### swap()
 
+**Bitwise.toggle(value, ...[idx1, idx2])**
 **Bitwise(value).swap(idx1, idx2)**
 
 Swap bits to index `idx1` and `idx2`
@@ -359,6 +425,8 @@ Example:
 
 ```js
 var Bitwise = require('bitwise-operation')
+
+Bitwise.swap(0b0101, [1, 2]);
 
 Bitwise(0b0101)
   .swap(1, 2)
@@ -396,7 +464,8 @@ Example:
 var Bitwise = require('bitwise-operation')
 
 Bitwise(0b0101)
-   .setValue(0b0111);
+   .setValue(0b0111)
+   .valueOf();
 
 => 0b0111
 ```
@@ -413,7 +482,8 @@ Example:
 var Bitwise = require('bitwise-operation')
 
 Bitwise(0b0101)
-   .setRange(1, 2);
+   .setRange(1, 2)
+   .valueOf();
 
 => 0b0111
 ```
@@ -430,7 +500,8 @@ Example:
 var Bitwise = require('bitwise-operation')
 
 Bitwise(0b0101)
-   .unsetRange(1, 2);
+   .unsetRange(1, 2)
+   .valueOf();
 
 => 0b0001
 ```
@@ -447,7 +518,8 @@ Example:
 var Bitwise = require('bitwise-operation')
 
 Bitwise(0b0101)
-   .toggleRange(1, 2);
+   .toggleRange(1, 2)
+   .valueOf();
 
 => 0b0011
 ```
@@ -463,10 +535,15 @@ Example:
 ```js
 var Bitwise = require('bitwise-operation')
 
-Bitwise(0b0101)
-   .toggleRange(1, 2);
+var a = Bitwise(0b0001);
+var b = a;
+var c = a.copy();
 
-=> 0b0011
+a.toggle(1);
+
+a.valueOf(); // => 0b0011
+b.valueOf(); // => 0b0011
+c.valueOf(); // => 0b0001
 ```
 Alias: **clone()**
 
@@ -555,7 +632,3 @@ bitwise.cardinality();
 
 => 6
 ```
-
-
-
-

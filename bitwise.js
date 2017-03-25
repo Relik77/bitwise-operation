@@ -1,4 +1,4 @@
-//     Bitwise.js 1.0.4
+//     Bitwise.js 1.1.0
 //     Bitwise may be freely distributed under the MIT license.
 
 (function() {
@@ -8,20 +8,21 @@
      * @constructor
      */
     function Bitwise(value) {
-        var self = this,
-            idx = 0;
+        var self = this;
 
         if (!(self instanceof Bitwise)) return new Bitwise(value);
         if (Array.isArray(value)) {
             self.value = 0;
-            value.forEach(function(value, idx) {
-                self.value |= (value ? 1 : 0) << idx;
+            value.forEach(function(bit, idx) {
+                self.value |= (bit ? 1 : 0) << idx;
             });
         } else if (typeof value == "string") {
+            var idx = 0;
+
             self.value = 0;
             for (var i = value.length - 1; i >= 0; i--) {
-                if (value[i] == "1" || value[i] == "0") {
-                    self.value |= (value[i] == "1" ? 1 : 0) << idx;
+                if (value[i] === "1" || value[i] === "0") {
+                    self.value |= (value[i] === "1" ? 1 : 0) << idx;
                     idx++;
                 }
             }
@@ -31,7 +32,11 @@
     }
 
     // Current version.
-    Bitwise.VERSION = '1.0.4';
+    Bitwise.VERSION = '1.1.0';
+
+    Bitwise.not = function(value) {
+        return ~value;
+    };
 
     Bitwise.and = function() {
         var args = Array.prototype.slice.call(arguments),
@@ -41,29 +46,7 @@
         while (args.length > 0) {
             bitwise.and(args.shift());
         }
-        return bitwise;
-    };
-
-    Bitwise.or = function() {
-        var args = Array.prototype.slice.call(arguments),
-            bitwise = args.shift();
-
-        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
-        while (args.length > 0) {
-            bitwise.or(args.shift());
-        }
-        return bitwise;
-    };
-
-    Bitwise.xor = function() {
-        var args = Array.prototype.slice.call(arguments),
-            bitwise = args.shift();
-
-        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
-        while (args.length > 0) {
-            bitwise.xor(args.shift());
-        }
-        return bitwise;
+        return bitwise.valueOf();
     };
 
     Bitwise.nand = function() {
@@ -74,7 +57,75 @@
         while (args.length > 0) {
             bitwise.nand(args.shift());
         }
-        return bitwise;
+        return bitwise.valueOf();
+    };
+    Bitwise.andNot = Bitwise.nand;
+
+    Bitwise.or = function() {
+        var args = Array.prototype.slice.call(arguments),
+            bitwise = args.shift();
+
+        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
+        while (args.length > 0) {
+            bitwise.or(args.shift());
+        }
+        return bitwise.valueOf();
+    };
+
+    Bitwise.nor = function() {
+        var args = Array.prototype.slice.call(arguments),
+            bitwise = args.shift();
+
+        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
+        while (args.length > 0) {
+            bitwise.nor(args.shift());
+        }
+        return bitwise.valueOf();
+    };
+
+    Bitwise.xor = function() {
+        var args = Array.prototype.slice.call(arguments),
+            bitwise = args.shift();
+
+        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
+        while (args.length > 0) {
+            bitwise.xor(args.shift());
+        }
+        return bitwise.valueOf();
+    };
+
+    Bitwise.xnor = function() {
+        var args = Array.prototype.slice.call(arguments),
+            bitwise = args.shift();
+
+        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
+        while (args.length > 0) {
+            bitwise.xnor(args.shift());
+        }
+        return bitwise.valueOf();
+    };
+    Bitwise.nxor = Bitwise.xnor;
+
+    Bitwise.toggle = function() {
+        var args = Array.prototype.slice.call(arguments),
+            bitwise = args.shift();
+
+        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
+        while (args.length > 0) {
+            bitwise.toggle(args.shift());
+        }
+        return bitwise.valueOf();
+    };
+
+    Bitwise.swap = function() {
+        var args = Array.prototype.slice.call(arguments),
+            bitwise = args.shift();
+
+        if (!(bitwise instanceof Bitwise)) bitwise = new Bitwise(bitwise);
+        while (args.length > 0) {
+            bitwise.swap(args.shift());
+        }
+        return bitwise.valueOf();
     };
 
     Bitwise.mask = function(from, to) {
@@ -82,7 +133,7 @@
 
         to = args.pop();
         from = args.pop() || 0;
-        return Bitwise().setRange(from, to);
+        return Bitwise(0).setRange(from, to).valueOf();
     };
 
 
@@ -107,7 +158,7 @@
         var value = this.value,
             array = [];
 
-        if (value == 0) return [0];
+        if (value === 0) return [0];
 
         while (value > 0) {
             array.push(value & 1 > 0 ? 1 : 0);
@@ -126,6 +177,7 @@
     };
     Bitwise.prototype.size = Bitwise.prototype.length;
 
+
     Bitwise.prototype.not = function() {
         this.value = ~this.value;
         return this;
@@ -137,9 +189,20 @@
         return this;
     };
 
+    Bitwise.prototype.nand = function(value) {
+        this.and(value).not();
+        return this;
+    };
+    Bitwise.prototype.andNot = Bitwise.prototype.nand;
+
     Bitwise.prototype.or = function(value) {
         if (value instanceof Bitwise) value = value.valueOf();
         this.value |= value;
+        return this;
+    };
+
+    Bitwise.prototype.nor = function(value) {
+        this.or(value).not();
         return this;
     };
 
@@ -148,16 +211,17 @@
         return this;
     };
 
-    Bitwise.prototype.nand = function(value) {
-        if (!(value instanceof Bitwise)) value = new Bitwise(value);
-        this.and(value).not();
+    Bitwise.prototype.xnor = function(value) {
+        this.xor(value).not();
         return this;
     };
-    Bitwise.prototype.andNot = Bitwise.prototype.nand;
+    Bitwise.prototype.nxor = Bitwise.prototype.xnor;
+
+
 
     Bitwise.prototype.set = function(idx, value) {
         if (value === false) return this.unset(idx);
-        if (idx < 0) return;
+        if (idx < 0) return this;
 
         this.value |= 1 << idx;
         return this;
@@ -183,6 +247,10 @@
 
     Bitwise.prototype.swap = function(idx1, idx2) {
         if (idx1 < 0 || idx2 < 0) return this;
+        if (Array.isArray(idx1)) {
+            idx2 = idx1.pop();
+            idx1 = idx1.shift();
+        }
 
         var tmp = this.copy();
         this.set(idx2, tmp.get(idx1));
@@ -193,7 +261,7 @@
 
     Bitwise.prototype.equals = function(value) {
         if (value instanceof Bitwise) value = value.valueOf();
-        return (this.value & value) == value;
+        return this.value === value;
     };
 
     Bitwise.prototype.setValue = function(value) {
@@ -205,14 +273,14 @@
     Bitwise.prototype.setRange = function(from, to) {
         if (from < 0 || to < 0) return this;
 
-        this.value |= Bitwise.xor((1 << from) - 1, (1 << to << 1) - 1).valueOf();
+        this.value |= Bitwise.xor((1 << from) - 1, (1 << to << 1) - 1);
         return this;
     };
 
     Bitwise.prototype.unsetRange = function(from, to) {
         if (from < 0 || to < 0) return this;
 
-        this.value &= Bitwise.xor((1 << from) - 1, (1 << to << 1) - 1).not().valueOf();
+        this.value &= ~Bitwise.xor((1 << from) - 1, (1 << to << 1) - 1);
         return this;
     };
 
@@ -221,17 +289,17 @@
 
         var mask = Bitwise.mask(from, to);
 
-        this.value = this.copy().not().and(mask).or(this.copy().and(mask.copy().not())).valueOf();
+        this.value = this.copy().not().and(mask).or(this.copy().and(Bitwise.not(mask))).valueOf();
         return this;
     };
 
     Bitwise.prototype.mask = function(from, to) {
-        this.and(Bitwise.mask.apply(Bitwise, arguments));
+        this.and(Bitwise.mask(from, to));
         return this;
     };
 
     Bitwise.prototype.clear = function(from, to) {
-        this.and(Bitwise.mask.apply(Bitwise, arguments).not());
+        this.and(Bitwise.not(Bitwise.mask(from, to)));
         return this;
     };
 
