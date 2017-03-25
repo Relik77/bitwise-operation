@@ -85,11 +85,11 @@ Bitwise("1011")
 
 Performs a logical **NOT** of this target bit set.
 
-Truth table:
-| a | NOT a |
-| --|-------|
-| 0 |   1   |
-| 1 |   0   |
+Truth table:  
+| a | NOT a |  
+| --|-------|  
+| 0 |   1   |  
+| 1 |   0   |  
 
 Example:
 
@@ -142,13 +142,13 @@ Bitwise(0b0111)
 
 Clears all of the bits in this BitSet whose corresponding bit is set in the specified BitSet.
 
-Truth table:
-| a | b | a NAND b |
-|---|---|----------|
-| 0 | 0 |     1    |
-| 0 | 1 |     1    |
-| 1 | 0 |     1    |
-| 1 | 1 |     0    |
+Truth table:  
+| a | b | a NAND b |  
+|---|---|----------|  
+| 0 | 0 |     1    |  
+| 0 | 1 |     1    |  
+| 1 | 0 |     1    |  
+| 1 | 1 |     0    |  
 
 Example:
 
@@ -201,13 +201,13 @@ Bitwise(0b0010)
 
 Performs a logical **NOR** of this bit set with the bit set argument.
 
-Truth table:
-| a | b | a NOR b |
-|---|---|---------|
-| 0 | 0 |    1    |
-| 0 | 1 |    0    |
-| 1 | 0 |    0    |
-| 1 | 1 |    0    |
+Truth table:  
+| a | b | a NOR b |  
+|---|---|---------|  
+| 0 | 0 |    1    |  
+| 0 | 1 |    0    |  
+| 1 | 0 |    0    |  
+| 1 | 1 |    0    |  
 
 Example:
 
@@ -259,12 +259,12 @@ Bitwise(0b0010)
 
 Performs a logical **XNOR** of this bit set with the bit set argument.
 
-Truth table:
-| a | b | a XNOR b |
-|---|---|----------|
-| 0 | 0 |     1    |
-| 0 | 1 |     0    |
-| 1 | 0 |     0    |
+Truth table:  
+| a | b | a XNOR b |  
+|---|---|----------|  
+| 0 | 0 |     1    |  
+| 0 | 1 |     0    |  
+| 1 | 0 |     0    |  
 | 1 | 1 |     1    |  
 
 Example:
