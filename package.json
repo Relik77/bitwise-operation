@@ -1,52 +1,52 @@
 {
-  "author": {
-    "name": "Gwenael Walet",
-    "email": "gwenael.walet@yahoo.fr"
-  },
-  "devDependencies": {
-    "eslint": "1.10.x",
-    "qunit-cli": "~0.2.0",
-    "qunitjs": "^1.18.0"
-  },
-  "scripts": {
-    "test": "npm run test-node && npm run lint",
-    "coverage": "nyc npm run test-node && nyc report",
-    "coveralls": "nyc npm run test-node && nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint bitwise.js",
-    "test-node": "qunit-cli test/tests.js",
-    "minify": "uglifyjs bitwise.js -c \"evaluate=false\" --comments \"/    .*/\" -m",
-    "build": "npm run minify -- --source-map bitwise-min.map --source-map-url \" \" -o bitwise-min.js"
-  },
-  "dependencies": {},
-  "description": "JavaScript's bitwise operation helper library.",
-  "directories": {},
-  "files": [
-    "bitwise.js",
-    "bitwise-min.js",
-    "bitwise-min.map",
-    "LICENSE"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Relik77/bitwise-operation.git"
-  },
-  "keywords": [
-    "util",
-    "functional",
-    "server",
-    "client",
-    "browser"
-  ],
-  "license": "MIT",
-  "main": "bitwise.js",
-  "maintainers": [
-    {
-      "name": "Gwenael Walet",
-      "email": "gwenael.walet@yahoo.fr"
-    }
-  ],
-  "name": "bitwise-operation",
-  "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
-  "version": "1.1.0"
+    "author": {
+        "name": "Gwenael Walet",
+        "email": "gwenael.walet@yahoo.fr"
+    },
+    "devDependencies": {
+        "eslint": "1.10.x",
+        "qunit-cli": "~0.2.0",
+        "qunitjs": "^1.18.0"
+    },
+    "scripts": {
+        "tsc": "tsc",
+        "test": "npm run test-node && npm run lint",
+        "coverage": "nyc npm run test-node && nyc report",
+        "coveralls": "nyc npm run test-node && nyc report --reporter=text-lcov | coveralls",
+        "lint": "eslint bitwise.js",
+        "test-node": "qunit-cli test/tests.js",
+        "minify": "uglifyjs bitwise.js -c \"evaluate=false\" --comments \"/    .*/\" -m",
+        "build": "npm run minify -- --source-map bitwise-min.map --source-map-url \" \" -o bitwise-min.js"
+    },
+    "dependencies": {},
+    "description": "JavaScript's bitwise operation helper library.",
+    "directories": {},
+    "files": [
+        "lib/**/*",
+        "index.js",
+        "LICENSE"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Relik77/bitwise-operation.git"
+    },
+    "keywords": [
+        "util",
+        "functional",
+        "server",
+        "client",
+        "browser"
+    ],
+    "license": "MIT",
+    "main": "index.js",
+    "maintainers": [
+        {
+            "name": "Gwenael Walet",
+            "email": "gwenael.walet@yahoo.fr"
+        }
+    ],
+    "name": "bitwise-operation",
+    "optionalDependencies": {},
+    "readme": "ERROR: No README data found!",
+    "version": "1.1.0"
 }
